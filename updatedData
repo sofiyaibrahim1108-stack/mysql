@@ -1,0 +1,26 @@
+CREATE TABLE `updatedData`(
+`studentId` int PRIMARY KEY AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+`age` tinyint NOT NULL,
+`gender` enum('male','female','others'),
+`email` varchar(255) NOT NULL,
+`courseId`int Not NULL,
+`cityId` varchar(255) DEFAULT NULL,
+`stateId` varchar(255) DEFAULT NULL,
+`country` varchar(255) DEFAULT NULL,
+`phoneNumber` varchar(15) NOT NULL,
+`createdAt`datetime DEFAULT CURRENT_TIMESTAMP,
+`updatedAt`datetime  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+UNIQUE KEY `unique_phoneNumber` (`phoneNumber`),
+UNIQUE KEY `unique_email` (`email`),
+ CONSTRAINT `fk_course`
+    FOREIGN KEY (`courseId`) REFERENCES `courses`(`courseId`)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+
+  CONSTRAINT `fk_city`
+    FOREIGN KEY (`cityId`) REFERENCES `cities`(`cityId`)
+    ON DELETE SET NULL ON UPDATE CASCADE,
+
+  CONSTRAINT `fk_state`
+    FOREIGN KEY (`stateId`) REFERENCES `states`(`stateId`)
+    ON DELETE SET NULL ON UPDATE CASCADE)
